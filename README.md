@@ -58,7 +58,6 @@ a browser with a javascript engine to use--no good if X has crashed on you and y
 ```
 usage: hashapass [-l] [-s] [parameter]
 
-
 -l    output "long" passwords: 28 characters (224 bits). By default, output 8 char (64 bit) passwords, which is hashapass.com's version.
 -s    "show" the password: display it when it has been computed; if this is not given, just write the password to the system clipboard; if xclip is not installed, -s is automatically on.
 parameter   if given on the command line, does not ask for it
@@ -66,7 +65,7 @@ parameter   if given on the command line, does not ask for it
 ```
 
 You can use this script either on the command line, where it will use `read` to ask for input, or
-from a a GUI (e.g. a .desktop file or by the Gnome/KDE command launcher).
+from a a GUI (e.g. a .desktop file or by the Gnome/KDE command launcher). All the arguments are optional.
 
 You might want to add
 ```
