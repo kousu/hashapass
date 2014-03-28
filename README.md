@@ -22,7 +22,7 @@ Every time you need to log in again, just repeat these steps.
 You only need to remember your master password, and you never need to write down anything.
 
 After you do this for while it becomes second nature, and it will be smooth to change your older passwords to
-hashapass form on your next change cycle (you do change your passwords regularly, right?)
+hashapass form on your next change cycle (you do change your passwords regularly, right?).
 
 If you do need to change an account password later for some reason then you can modify the parameter you use, e.g. "github.com" -> "github.com2" (though you could also come up with a second master password).
 
