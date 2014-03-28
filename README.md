@@ -58,14 +58,21 @@ a browser with a javascript engine to use--no good if X has crashed on you and y
 ```
 usage: hashapass [-l] [-s] [parameter]
 
--l    output "long" passwords: 28 characters (224 bits). By default, output 8 char (64 bit) passwords, which is hashapass.com's version.
--s    "show" the password: display it when it has been computed; if this is not given, just write the password to the system clipboard; if xclip is not installed, -s is automatically on.
-parameter   if given on the command line, does not ask for it
+Ask for your "master password" and compute hashapass(master, parameter).
+Writes the resulting, constructed, password to the system clipboard via `xclip` if posible.
 
+-l           output "long" passwords: 28 characters (216 bits of entropy).
+             By default, outputs 8 chars (64 bits), which is hashapass.com-compatible.
+-s           "show" the password: display it to the user when it has been computed.
+             Always on if xclip is not installed.
+parameter    can be given on the command line to speed up usage or be used in aliases and scripts.
+
+All the arguments are optional.
+
+If run from the command line (i.e. a tty), interacts with you on stdin.
+If run from a GUI (e.g. .desktop file or by the Gnome/KDE command launcher), interacts via `zenity`.
 ```
 
-You can use this script either on the command line, where it will use `read` to ask for input, or
-from a a GUI (e.g. a .desktop file or by the Gnome/KDE command launcher). All the arguments are optional.
 
 You might want to add
 ```
@@ -76,7 +83,7 @@ to your `.profile` to use long passwords by default. The only reason short passw
 The quickest way to use this in daily linux desktop use is to make sure `zenity` is installed,
 then memorize this key sequence:  
 `ctrl-F2` + `hashapass site.com` + `[enter]` + `[password]` + `[enter]`. Note that there is a small security risk here:
-a user (eg a virus) that has the ability to run `ps -auxww` will be able to see your parameters (but not your master password and not your generated passwords) and,
+a user (eg a virus) that has the ability to run `ps -auxww` or read your `.bash_history` will be able to see your parameters (but not your master password and not your generated passwords) and,
 if hmac is some day compromised, could reverse engineer your passwords.
 
 You must have [openssl](https://www.openssl.org/)'s command line interface installed, but if you don't have that your linux is crippled and you should reinstall.
