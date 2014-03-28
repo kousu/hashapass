@@ -4,17 +4,29 @@ hashapass
 Linux implementation of http://hashapass.com (zenity and shell-based).
 
 In a world of shortening attention spans and exploding password use, most people use one password across several accounts,
-making common attacks like the [LinkedIn hack](FIXME) and the [PS3 break-in]() vicious, or obsessively use distinct passwords
-everywhere, requiring them to keep an insecure copy on paper or in an online password manager.
-Hashapass is the best of both worlds, mathematically protecting your many distinct passwords with a single master password,
-**and not recording them anywhere**.
+making common attacks like the [LinkedIn hack](FIXME) and the [PS3 break-in](FOXYOU) vicious,
+or obsessively use distinct passwords everywhere,
+requiring them to keep an insecure copy on paper or in an online password manager.
+*Hashapass* is the best of both worlds, mathematically protecting your many distinct passwords with a single master password,
+_**and not recording them anywhere**_.
 
 [Hashapass](http://hashapass.com/en/index.html) was originally written by [?????????????????](FIXME).
 
-To start to use hashapass, you get yourself in the habit of signing up for new accounts with it. When you make an account,
-take the domain name of the site, or some other string that the site reminds you of (for example, I used "lj" for livejournal, and I use "github.com" for github),
-and enter it as the "parameter" in hashapass. Then type your master password, and click the button. _Take_ the result it gives,
-and paste it into the site you are signing up for as your new password.
+To start to use hashapass, get yourself in the habit of signing up for new accounts with it:
+when you make an account, take the domain name of the site, or some other string that the site
+reminds you of (for example, I used "lj" for livejournal, and I use "github.com" for github),
+and enter it as the "parameter" in hashapass. Then type your _master password_,
+click the button, and give **the result** it gives to the site you are signing up for as your new password.
+
+Every time you need to log in again, just repeat these steps.
+You only need to remember your master password, and you never need to write down anything.
+
+After you do this for while it becomes second nature, and it will be smooth to change your older passwords to
+hashapass form on your next change cycle (you do change your passwords regularly, right?)
+
+If you do need to change an account password later for some reason then you can modify the parameter you use, e.g. "github.com" -> "github.com2" (though you could also come up with a second master password).
+
+## Paranoia
 
 But after you have done this for a while, you might start to wonder if you can trust hashapass. Indeed, some people do:
 
@@ -23,31 +35,22 @@ But after you have done this for a while, you might start to wonder if you can t
 Sure, you can [view the source](http://hashapass.com/en/index.js), but it has been minified since it was first written.
 And if you are using it via the web interface, then every time you need to use it you need to load this site,
 which doesn't use SSL and so could be MITM'd to insert code that recorded all passwords constructed with it,
-and anyway might be taken offline any day. This implementation is my safety net.
+and anyway might be taken offline any day.
 
 Hashapass provides a [bookmarklet](http://hashapass.com/en/bookmarklet.html), but that only works for websites, many of those websites
 break the bookmarklet is activated but trying to be more clever than the web (I'm looking at you, wikispaces; you aren't the only offender, though),
 and it is impossible to use the bookmarklet to e.g. sign in to an ssh account.
 
 You can save hashapass's [mobile edition](http://hashapass.com/en/phone.html) to your desktop, but that requires spawning
-a browser with a javascript engine to use--no good if X has crashed on you and you need to login to your remote site to recover
-a backup.
+a browser with a javascript engine to use--no good if X has crashed on you and you need to login to your remote site to recover a backup.
+
+This implementation is my safety net against all of these worries.
 
 The core of this script is [from the original author](http://hashapass.com/en/cmd.html) and only uses basic, open-source cryptography tools:
 ```
-hashapass() {
-  #from http://hashapass.com/en/cmd.html
-  parameter=$1
-  password=$2
   hashed_pass=$(echo -n $parameter \
         | openssl dgst -sha1 -binary -hmac $password \
         | openssl enc -base64)
-  if [ $LONG ]; then
-    echo $hashed_pass
-  else
-    echo $hashed_pass | cut -c 1-8
-  fi
-}
 ```
 
 
@@ -66,6 +69,12 @@ parameter   if given on the command line, does not ask for it
 
 You can use this script either on the command line, where it will use `read` to ask for input, or
 from a a GUI (e.g. a .desktop file or by the Gnome/KDE command launcher).
+
+You might want to add
+```
+alias hashapass="hashapass -l"
+```
+to your `.profile` to use long passwords by default. The only reason short passwords are default is that I used web- hashapass for so long that almost all of my passwords are in short hashapass format and changing them now would be a pain.
 
 The quickest way to use this in daily linux desktop use is to make sure `zenity` is installed,
 then memorize this key sequence:  
@@ -89,3 +98,6 @@ The password is protected by [HMAC](https://en.wikipedia.org/wiki/HMAC)ing the p
 
 [pwdhash](http://pwdhash.com)---by Stanford University Cryptographer [Dan Boneh](https://crypto.stanford.edu/~dabo/)
 who was one of the founding teachers in Coursera--is the same idea with different (and incompatible) details.
+
+For security, your _master password_ should not be used anywhere except for hashapass, and should not be written down. Hashapass offers zero theoretical security if your master password is recovered from the LinkedIn database dump or by a malicious Facebook employee.
+
