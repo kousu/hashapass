@@ -33,18 +33,17 @@ But after you have done this for a while, you might start to wonder if you can t
 ["God I hope this isn't backdoored"](https://play.google.com/store/apps/details?id=com.hashapass.androidapp&reviewId=Z3A6QU9xcFRPRkRfbkk3aE1nWnZyN2ZmQU1hcFBDdlRNSm9xVnFfQnBscG9YdWxNeHQ3TXBFRUkzcUI3b0ZITjctN0Z5VnYtcnZSRktiR1dLaXRTMS1DcUNR)
 
 Sure, you can [view the source](http://hashapass.com/en/index.js), but it has been minified since it was first written.
-And if you are using it via the web interface, then every time you need to use it you need to load this site,
-which doesn't use SSL and so could be MITM'd to insert code that recorded all passwords constructed with it,
-and anyway might be taken offline any day.
+The web interface is convenient but the site doesn't use SSL so you as a user of it are very vulnerable to a MITM'd inserting code that records passwords as they are constructed,
+and anyway might crash, run out of funding, electricity or chutzpah any day.
 
-Hashapass provides a [bookmarklet](http://hashapass.com/en/bookmarklet.html), but that only works for websites, many of those websites
+The site provides a [bookmarklet](http://hashapass.com/en/bookmarklet.html), but that only works for websites, many of those websites
 break the bookmarklet is activated but trying to be more clever than the web (I'm looking at you, wikispaces; you aren't the only offender, though),
 and it is impossible to use the bookmarklet to e.g. sign in to an ssh account.
 
-You can save hashapass's [mobile edition](http://hashapass.com/en/phone.html) to your desktop, but that requires spawning
+You can save the [mobile edition](http://hashapass.com/en/phone.html) to your desktop, but that requires spawning
 a browser with a javascript engine to use--no good if X has crashed on you and you need to login to your remote site to recover a backup.
 
-This implementation is my safety net against all of these worries: it runs locally and the core* uses only basic, open-source, cryptography tools:
+**This implementation is my safety net against all of these worries**: it runs locally and the core* uses only basic, open-source, cryptography tools:
 ```
   hashed_pass=$(echo -n $parameter \
         | openssl dgst -sha1 -binary -hmac $password \
