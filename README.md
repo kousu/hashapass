@@ -44,14 +44,13 @@ and it is impossible to use the bookmarklet to e.g. sign in to an ssh account.
 You can save hashapass's [mobile edition](http://hashapass.com/en/phone.html) to your desktop, but that requires spawning
 a browser with a javascript engine to use--no good if X has crashed on you and you need to login to your remote site to recover a backup.
 
-This implementation is my safety net against all of these worries.
-
-The core of this script is [from the original author](http://hashapass.com/en/cmd.html) and only uses basic, open-source cryptography tools:
+This implementation is my safety net against all of these worries: it runs locally and the core* uses only basic, open-source, cryptography tools:
 ```
   hashed_pass=$(echo -n $parameter \
         | openssl dgst -sha1 -binary -hmac $password \
         | openssl enc -base64)
 ```
+[* from the original author](http://hashapass.com/en/cmd.html)
 
 
 
