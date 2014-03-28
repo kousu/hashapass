@@ -26,6 +26,14 @@ hashapass form on your next change cycle (you do change your passwords regularly
 
 If you do need to change an account password later for some reason then you can modify the parameter you use, e.g. "github.com" -> "github.com2" (though you could also come up with a second master password).
 
+Some sites have extra rules for their passwords--like requiring at least one
+punctuation character and at least one number.
+[These sites are assholes](http://xkcd.com/936/).
+My workaround for them is to keep a `passwords.txt` which **only** lists those sites and for each 
+**only** records `hashapass(assholesite.com)+"2#"` where "2#" is whatever addition assuaged their rules.
+
+Pull requests welcome!
+
 ## Paranoia
 
 But after you have done this for a while, you might start to wonder if you can trust hashapass. Indeed, some people do:
@@ -88,13 +96,6 @@ if hmac is some day compromised, could reverse engineer your passwords.
 
 You must have [openssl](https://www.openssl.org/)'s command line interface installed, but if you don't have that your linux is crippled and you should reinstall.
 You must have [zenity](https://help.gnome.org/users/zenity/) and [xclip](http://sourceforge.net/projects/xclip/) installed to use the GUI implementation.
-
-Some sites have extra rules for their passwords like required amount of punctuation or letters.
-[These sites are assholes](http://xkcd.com/936/).
-My workaround for them is to keep a `passwords.txt` which **only** lists those sites and for each 
-**only** records `hashapass(assholesite.com)+"2#"` where "2#" is whatever addition assuaged their rules.
-
-Pull requests welcome!
 
 ## Mathematical Details
 
