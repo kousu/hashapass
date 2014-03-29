@@ -3,7 +3,7 @@
 #nick@kousu.ca, Sep 8, 2013
 #public domain <http://creativecommons.org/publicdomain/zero/1.0/>
 
-#usage: hashapass [--long] [-s] [parameter]
+#usage: hashapass [-l] [-s] [parameter]
 # hashapass combines a 'parameter' (imagine a username, website, favourite quote...)
 # with a secret password to generate another associated password. In this way
 # you can have one hard master password that you memorize and never ever write 
@@ -41,7 +41,7 @@
 
 
 usage() {
-  echo "Usage:" "hashapass [--long] [-s] [parameter]"
+  echo "Usage:" "hashapass [-l] [-s] [parameter]"
 }
 
 #there is getopt and there is getopts. fml.
@@ -49,6 +49,8 @@ while getopts "sl" opt; do
 #echo "currently parsing argument '$opt'"
 
 case "$opt" in
+  h)
+  USAGE=true;;
   s)
   #echo "SHOW turned on"
   SHOW=true;;
@@ -62,7 +64,10 @@ esac
 done
 shift $((OPTIND-1)) #eat everything
 
-if [ $# -gt 1 ]; then
+if [ $USAGE ]; then
+  usage;
+  exit 0;
+elif [ $# -gt 1 ]; then
   echo -n "Too many parameters.  "
   usage;
   exit -1;
