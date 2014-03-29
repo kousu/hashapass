@@ -23,15 +23,14 @@ click the button, and give **the result** it gives to the site you are signing u
 Every time you need to log in again, just repeat these steps.
 You only need to remember your master password, and you never need to write down anything.
 
-After you do this for while it becomes second nature, and it will be smooth to change your older passwords to
-hashapass form on your next change cycle (you do change your passwords regularly, right?).
-
-If you do need to update an account password later _for some reason_, you can modify the parameter. e.g. instead of "github.com" enter "github.com2" (you could also come up with a second master password, but then you are creeping back towards keychains).
+After a while, hashing your password on login becomes second nature, and you will find yourself updating your older passwords to hashapass form on your next cycle (you do change your passwords regularly, right?).
 
 Some sites have extra rules for their passwords--like requiring at least one
 punctuation character and at least one number.
 [These sites are assholes](http://xkcd.com/936/).
-My workaround for them is to keep a `passwords.txt` which records `hashapass(assholesite.com)+"2#"` where "2#" is whatever addition assuaged their rules. I also record sites I do not visit very much but have "[salted](https://en.wikipedia.org/wiki/Salt_%28cryptography%29)" (e.g. to update the password of).
+My workaround for them is to keep a `passwords.txt` which records `hashapass(assholesite.com)+"2#"` where "2#" is whatever addition assuaged their rules.
+
+If you do need to update an account password later _for some reason_, you can [salt](https://en.wikipedia.org/wiki/Salt_%28cryptography%29) the parameter. e.g. instead of "github.com" enter "github.com2". I record these cases in `passwords.txt` but only if I find myself forgetting the salt.
 
 The more people are disciplined enough to use hashapass or one of the [competitors](#The Competition) everywhere, the safer the web is for all of us.
 
