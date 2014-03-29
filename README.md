@@ -1,4 +1,4 @@
-    hashapass
+hashapass
 =========
 
 Linux implementation of http://hashapass.com (zenity and shell-based).
