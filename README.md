@@ -114,8 +114,8 @@ For security, your _master password_ should not be used anywhere except for hash
 
 ## The Competition
 
-* [pwdhash](http://pwdhash.com) - _js_ - same idea, different (and incompatible) details (par Stanford University Cryptographer [Dan Boneh](https://crypto.stanford.edu/~dabo/)
-who was one of the founding instructors of Coursera) --
+* [pwdhash](http://pwdhash.com) - _js_ - incompatible (par Stanford University Cryptographer [Dan Boneh](https://crypto.stanford.edu/~dabo/)
+who was one of the founding instructors of Coursera)
 * [hap](https://github.com/sitaramc/hap) - _perl + bash_
 * [hap2](https://github.com/sitaramc/hap2) - _perl + bash_ - incompatible, probably stronger
 * [ecin's](https://github.com/ecin/hashapass.rb/blob/master/hashapass.rb) - _ruby_
