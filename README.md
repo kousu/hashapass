@@ -5,7 +5,7 @@ Linux implementation of http://hashapass.com (zenity- and shell-based).
 
 In a world of shortening attention spans and exploding password use,
 most people use _one password across several accounts_,
-making common attacks like the [LinkedIn hack](FIXME) and the [PS3 break-in](FOXYOU) and probably a lot more that no one is aware even occurred viciously dangerous.
+making common attacks like the [LinkedIn hack](FIXME) and the [PS3 break-in](FOXYOU) and those no one is even aware of viciously dangerous.
 The security-savvy obsessively use _distinct passwords everywhere_,
 which requires keeping an insecure copy on paper, 
 in an online password manager from a company you can't necessarily trust,
