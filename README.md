@@ -106,3 +106,10 @@ who was one of the founding teachers in Coursera--is the same idea with differen
 
 For security, your _master password_ should not be used anywhere except for hashapass, and should not be written down. Hashapass offers zero theoretical security if your master password is recovered from the LinkedIn database dump or by a malicious Facebook employee.
 
+
+## The Competition
+
+* [hap](https://github.com/sitaramc/hap) - _perl + bash_
+* [ecin's](https://github.com/ecin/hashapass.rb/blob/master/hashapass.rb) - _ruby_
+* [emacs-hashapass](https://github.com/ekpneo/emacs-hashapass) - _elisp_
+* [pdf rainbow encryptor](https://github.com/ant4g0nist/rainbow.py) - _python + pdftk_
