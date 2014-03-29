@@ -5,17 +5,16 @@ Linux implementation of http://hashapass.com (zenity- and shell-based).
 
 In a world of shortening attention spans and exploding password use,
 most people use _one password across several accounts_,
-making common attacks like the [LinkedIn hack](FIXME) and the [PS3 break-in](FOXYOU) and those no one is even aware of viciously dangerous.
-The security-savvy obsessively use _distinct passwords everywhere_,
-which requires keeping an insecure copy on paper, 
-in an online password manager from a company you can't necessarily trust,
-or in an offline password wallet (e.g. the [Firefox password manager](https://support.mozilla.org/en-US/kb/password-manager-remember-delete-change-passwords?redirectlocale=en-US&redirectslug=Remembering+passwords), [gnome-keyring](https://wiki.gnome.org/Projects/GnomeKeyring), [Keychain](https://en.wikipedia.org/wiki/Apple_Keychain), [keepass](http://keepass.info/)) which could be attacked when and if someone gets physical access to your device--and has all the sync problems of rolling your own.
+making common attacks like the [LinkedIn hack](FIXME) and the [PS3 break-in](FOXYOU) and worse: those no one is even aware of, viciously dangerous.
+The security-savvy use _distinct passwords everywhere_,
+but the human mind is short on [serial memory](https://www.youtube.com/watch?v=XxIzmkWygjY) so this requires: i) keeping an insecure copy on paper, 
+ii) putting your trust in an online, for-profit password manager,
+or iii) maintaining an offline password wallet (e.g. [the Firefox password manager](https://support.mozilla.org/en-US/kb/password-manager-remember-delete-change-passwords?redirectlocale=en-US&redirectslug=Remembering+passwords), [gnome-keyring](https://wiki.gnome.org/Projects/GnomeKeyring), [Keychain](https://en.wikipedia.org/wiki/Apple_Keychain), [keepass](http://keepass.info/)) which is vulnerable to brute forcing if (really, when) someone gets physical access to your device, and has all the sync problems that come with rolling your own.
 **Hashapass** is the best of both worlds, creating distinct passwords with more creativity (that is, entropy) than you have in your head from one single master password, all while  _**making no records anywhere**_.
 
 [Hashapass](http://hashapass.com/en/index.html) was originally written by [a very nice frenchman](FIXME).
 
-To start to use hashapass, get yourself in the habit of signing up for new accounts with it:
-when you make an account, take the domain name of the site, or some other string that the site
+Hashapass is part software and part habit. The habit is to use it when creating accounts. Everytime you do a signup, take the domain name of the site, or some other string that the site
 reminds you of (for example, I used "lj" for livejournal, and I use "github.com" for github),
 and enter it as the "parameter" in hashapass. Then type your _master password_,
 click the button, and give **the result** it gives to the site you are signing up for as your new password.
@@ -31,6 +30,8 @@ punctuation character and at least one number.
 My workaround for them is to keep a `passwords.txt` which records `hashapass(assholesite.com)+"2#"` where "2#" is whatever addition assuaged their rules.
 
 If you do need to update an account password later _for some reason_, you can [salt](https://en.wikipedia.org/wiki/Salt_%28cryptography%29) the parameter. e.g. instead of "github.com" enter "github.com2". I record these cases in `passwords.txt` but only if I find myself forgetting the salt.
+
+Because you get to explicitly choose the "parameter", you can use hashapass for anywhere you need a password: your laptop's root account, your ssh account at work, or a throwaway account on a friends' machine. It is not limited to just the web (like [some other](FIXME) password schemes are).
 
 The more people are disciplined enough to use hashapass or one of the [competitors](#The Competition) everywhere, the safer the web is for all of us.
 
@@ -124,3 +125,9 @@ who was one of the founding instructors of Coursera)
 * [ecin's](https://github.com/ecin/hashapass.rb/blob/master/hashapass.rb) - _ruby_
 * [emacs-hashapass](https://github.com/ekpneo/emacs-hashapass) - _elisp_ - for emacs
 * [pdf rainbow encryptor](https://github.com/ant4g0nist/rainbow.py) - _python + pdftk_ - custom purpose
+
+For a different approach, you could use the xkcd password generator
+* [anonymous web1](http://xkcdpassword.com/)
+* [@preshing's](http://preshing.com/20110811/xkcd-password-generator/) 
+* [@redacted](https://github.com/redacted/XKCD-password-generator)'s
+* [@barnybug](https://github.com/barnybug/xkcd-password)'s
