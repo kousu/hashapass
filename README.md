@@ -14,8 +14,7 @@ or in an offline password wallet (e.g. the [Firefox password manager](https://su
 
 [Hashapass](http://hashapass.com/en/index.html) was originally written by [a very nice frenchman](FIXME).
 
-To start to use hashapass, get yourself in the habit of signing up for new accounts with it:
-when you make an account, take the domain name of the site, or some other string that the site
+Hashapass is part software and part habit. The habit is to use it when creating accounts. Everytime you do a signup, take the domain name of the site, or some other string that the site
 reminds you of (for example, I used "lj" for livejournal, and I use "github.com" for github),
 and enter it as the "parameter" in hashapass. Then type your _master password_,
 click the button, and give **the result** it gives to the site you are signing up for as your new password.
@@ -31,6 +30,8 @@ punctuation character and at least one number.
 My workaround for them is to keep a `passwords.txt` which records `hashapass(assholesite.com)+"2#"` where "2#" is whatever addition assuaged their rules.
 
 If you do need to update an account password later _for some reason_, you can [salt](https://en.wikipedia.org/wiki/Salt_%28cryptography%29) the parameter. e.g. instead of "github.com" enter "github.com2". I record these cases in `passwords.txt` but only if I find myself forgetting the salt.
+
+Because you get to explicitly choose the "parameter", you can use hashapass for anywhere you need a password: your laptop's root account, your ssh account at work, or a throwaway account on a friends' machine. It is not limited to just the web (like [some other](FIXME) password schemes are).
 
 The more people are disciplined enough to use hashapass or one of the [competitors](#The Competition) everywhere, the safer the web is for all of us.
 
