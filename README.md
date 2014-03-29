@@ -108,15 +108,16 @@ Mathematical Details
 
 The password is protected by [HMAC](https://en.wikipedia.org/wiki/HMAC)ing the parameter with your master password as the key. HMAC is a way of constructing verifiable hashes out of basic hash functions, and has so far even resisted attacks that have broken the hashes inside it, like MD5. The hash function used is hashapass is [SHA-1](https://en.wikipedia.org/wiki/SHA-1).
 
-[pwdhash](http://pwdhash.com)---by Stanford University Cryptographer [Dan Boneh](https://crypto.stanford.edu/~dabo/)
-who was one of the founding teachers in Coursera--is the same idea with different (and incompatible) details.
 
 For security, your _master password_ should not be used anywhere except for hashapass, and should not be written down. Hashapass offers zero theoretical security if your master password is recovered from the LinkedIn database dump or by a malicious Facebook employee.
 
 
 ## The Competition
 
+* [pwdhash](http://pwdhash.com) - _js_ - same idea, different (and incompatible) details (par Stanford University Cryptographer [Dan Boneh](https://crypto.stanford.edu/~dabo/)
+who was one of the founding instructors of Coursera) --
 * [hap](https://github.com/sitaramc/hap) - _perl + bash_
+* [hap2](https://github.com/sitaramc/hap2) - _perl + bash_ - incompatible, probably stronger
 * [ecin's](https://github.com/ecin/hashapass.rb/blob/master/hashapass.rb) - _ruby_
-* [emacs-hashapass](https://github.com/ekpneo/emacs-hashapass) - _elisp_
-* [pdf rainbow encryptor](https://github.com/ant4g0nist/rainbow.py) - _python + pdftk_
+* [emacs-hashapass](https://github.com/ekpneo/emacs-hashapass) - _elisp_ - for emacs
+* [pdf rainbow encryptor](https://github.com/ant4g0nist/rainbow.py) - _python + pdftk_ - custom purpose
