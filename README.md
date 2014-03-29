@@ -125,3 +125,9 @@ who was one of the founding instructors of Coursera)
 * [ecin's](https://github.com/ecin/hashapass.rb/blob/master/hashapass.rb) - _ruby_
 * [emacs-hashapass](https://github.com/ekpneo/emacs-hashapass) - _elisp_ - for emacs
 * [pdf rainbow encryptor](https://github.com/ant4g0nist/rainbow.py) - _python + pdftk_ - custom purpose
+
+For a different approach, you could use the xkcd password generator
+* [anonymous web1](http://xkcdpassword.com/)
+* [@preshing's](http://preshing.com/20110811/xkcd-password-generator/) 
+* [@redacted](https://github.com/redacted/XKCD-password-generator)'s
+* [@barnybug](https://github.com/barnybug/xkcd-password)'s
