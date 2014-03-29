@@ -45,7 +45,7 @@ usage() {
 }
 
 #there is getopt and there is getopts. fml.
-while getopts "sl" opt; do
+while getopts "hsl" opt; do
 #echo "currently parsing argument '$opt'"
 
 case "$opt" in
