@@ -99,7 +99,7 @@ You must have [zenity](https://help.gnome.org/users/zenity/) and [xclip](http://
 
 ## Mathematical Details
 
-The password is protected by [HMAC](https://en.wikipedia.org/wiki/HMAC)ing the parameter with your master password as the key.
+The password is protected by [HMAC](https://en.wikipedia.org/wiki/HMAC)ing the parameter with your master password as the key. HMAC is a way of constructing verifiable hashes out of basic hash functions, and has so far even resisted attacks that have broken the hashes inside it, like MD5. The hash function used is hashapass is [SHA-1](https://en.wikipedia.org/wiki/SHA-1).
 
 [pwdhash](http://pwdhash.com)---by Stanford University Cryptographer [Dan Boneh](https://crypto.stanford.edu/~dabo/)
 who was one of the founding teachers in Coursera--is the same idea with different (and incompatible) details.
