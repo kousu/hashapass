@@ -7,9 +7,9 @@ In a world of shortening attention spans and exploding password use,
 most people use _one password across several accounts_,
 making common attacks like the [LinkedIn hack](FIXME) and the [PS3 break-in](FOXYOU) and worse: those no one is even aware of, viciously dangerous.
 The security-savvy use _distinct passwords everywhere_,
-but the human mind is short on [serial memory](https://www.youtube.com/watch?v=XxIzmkWygjY), this records: keeping an insecure copy on paper, 
-putting your trust in an online, for-profit password manager,
-or maintaining an offline password wallet (e.g. the [Firefox password manager](https://support.mozilla.org/en-US/kb/password-manager-remember-delete-change-passwords?redirectlocale=en-US&redirectslug=Remembering+passwords), [gnome-keyring](https://wiki.gnome.org/Projects/GnomeKeyring), [Keychain](https://en.wikipedia.org/wiki/Apple_Keychain), [keepass](http://keepass.info/)) which is vulnerable to brute forcing if (really, when) someone gets physical access to your device, and has all the sync problems that come with rolling your own.
+but the human mind is short on [serial memory](https://www.youtube.com/watch?v=XxIzmkWygjY) so this requires: i) keeping an insecure copy on paper, 
+ii) putting your trust in an online, for-profit password manager,
+or iii) maintaining an offline password wallet (e.g. the [Firefox password manager](https://support.mozilla.org/en-US/kb/password-manager-remember-delete-change-passwords?redirectlocale=en-US&redirectslug=Remembering+passwords), [gnome-keyring](https://wiki.gnome.org/Projects/GnomeKeyring), [Keychain](https://en.wikipedia.org/wiki/Apple_Keychain), [keepass](http://keepass.info/)) which is vulnerable to brute forcing if (really, when) someone gets physical access to your device, and has all the sync problems that come with rolling your own.
 **Hashapass** is the best of both worlds, creating distinct passwords with more creativity (that is, entropy) than you have in your head from one single master password, all while  _**making no records anywhere**_.
 
 [Hashapass](http://hashapass.com/en/index.html) was originally written by [a very nice frenchman](FIXME).
