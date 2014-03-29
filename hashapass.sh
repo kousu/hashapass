@@ -118,7 +118,7 @@ hashapass() {
 result=$(hashapass $parameter $password)
 
 
-if which xclip 1>/dev/null; then              #check if xclip is on the system;5B;5B;5B;5B
+if [ $DISPLAY ] && (which xclip 1>/dev/null); then   #check if we can use the clipboard
   echo -n $result | xclip -selection clipboard;
 else
   SHOW=true;
