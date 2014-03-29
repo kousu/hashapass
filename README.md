@@ -12,7 +12,7 @@ in an online password manager from a company you can't necessarily trust,
 or in an offline password wallet (e.g. the [Firefox password manager](https://support.mozilla.org/en-US/kb/password-manager-remember-delete-change-passwords?redirectlocale=en-US&redirectslug=Remembering+passwords), [gnome-keyring](https://wiki.gnome.org/Projects/GnomeKeyring), [Keychain](https://en.wikipedia.org/wiki/Apple_Keychain), [keepass](http://keepass.info/)) which could be attacked when and if someone gets physical access to your device--and has all the sync problems that rolling your own comes with.
 **Hashapass** is the best of both worlds, creating distinct passwords with more creativity (that is, entropy) than you have in your head from one single master password, all while  _**making no records anywhere**_.
 
-[Hashapass](http://hashapass.com/en/index.html) was originally written by [?????????????????](FIXME).
+[Hashapass](http://hashapass.com/en/index.html) was originally written by [a very nice frenchman](FIXME).
 
 To start to use hashapass, get yourself in the habit of signing up for new accounts with it:
 when you make an account, take the domain name of the site, or some other string that the site
