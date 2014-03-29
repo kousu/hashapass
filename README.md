@@ -1,7 +1,7 @@
 hashapass.sh
 ============
 
-Linux implementation of http://hashapass.com (zenity and shell-based).
+Linux implementation of http://hashapass.com (zenity- and shell-based).
 
 In a world of shortening attention spans and exploding password use,
 most people use one password across several accounts,
@@ -26,15 +26,14 @@ You only need to remember your master password, and you never need to write down
 After you do this for while it becomes second nature, and it will be smooth to change your older passwords to
 hashapass form on your next change cycle (you do change your passwords regularly, right?).
 
-If you do need to change an account password later for some reason then you can modify the parameter you use, e.g. "github.com" -> "github.com2" (though you could also come up with a second master password).
+If you do need to update an account password later _for some reason_, you can modify the parameter. e.g. instead of "github.com" enter "github.com2" (you could also come up with a second master password, but then you are creeping back towards keychains).
 
 Some sites have extra rules for their passwords--like requiring at least one
 punctuation character and at least one number.
 [These sites are assholes](http://xkcd.com/936/).
-My workaround for them is to keep a `passwords.txt` which **only** lists those sites and for each 
-**only** records `hashapass(assholesite.com)+"2#"` where "2#" is whatever addition assuaged their rules.
+My workaround for them is to keep a `passwords.txt` which records `hashapass(assholesite.com)+"2#"` where "2#" is whatever addition assuaged their rules. I also record sites I do not visit very much but have "[salted](https://en.wikipedia.org/wiki/Salt_%28cryptography%29)" (e.g. to update the password of).
 
-The more people are disciplined enough to use hashapass everywhere, the safer the web is for all of us.
+The more people are disciplined enough to use hashapass or one of the [competitors](#The Competition) everywhere, the safer the web is for all of us.
 
 Pull requests welcome!
 
@@ -100,8 +99,13 @@ then memorize this key sequence:
 a user (eg a virus) that has the ability to run `ps -auxww` or read your `.bash_history` will be able to see your parameters (but not your master password and not your generated passwords) and,
 if hmac is some day compromised, could reverse engineer your passwords.
 
-You must have [openssl](https://www.openssl.org/)'s command line interface installed, but if you don't have that your linux is crippled and you should reinstall.
+Dependencies
+------------
+
+You must have [openssl](https://www.openssl.org/)'s command line interface installed, but if you don't have that your linux is crippled and you should reinstall.  
 You must have [zenity](https://help.gnome.org/users/zenity/) and [xclip](http://sourceforge.net/projects/xclip/) installed to use the GUI implementation.
+
+I say above that this is "Linux" and "zenity" based, but it should be usable on any platform with OpenSSL. This means it should work on *BSD, Linux 2 through 3, Cygwin, and OS X (again, pull requests, especially usability and cross-platform work, welcome).
 
 Mathematical Details
 --------------------
