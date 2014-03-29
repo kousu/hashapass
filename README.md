@@ -127,6 +127,7 @@ who was one of the founding instructors of Coursera)
 * [pdf rainbow encryptor](https://github.com/ant4g0nist/rainbow.py) - _python + pdftk_ - custom purpose
 
 For a different approach, you could use the xkcd password generator
+
 * [Torbjørn Kvåle](http://xkcdpassword.com/)'s ([home site](http://kvaale.no/)) 
 * [@preshing](http://preshing.com/20110811/xkcd-password-generator/)'s
 * [@redacted](https://github.com/redacted/XKCD-password-generator)'s
