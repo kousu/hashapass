@@ -1,14 +1,16 @@
-hashapass
-=========
+hashapass.sh
+============
 
 Linux implementation of http://hashapass.com (zenity and shell-based).
 
-In a world of shortening attention spans and exploding password use, most people use one password across several accounts,
-making common attacks like the [LinkedIn hack](FIXME) and the [PS3 break-in](FOXYOU) vicious,
-or obsessively use distinct passwords everywhere,
-requiring them to keep an insecure copy on paper or in an online password manager.
-**Hashapass** is the best of both worlds, creating distinct passwords with more creativity than you have,
-out of a single master password, while _**making no records anywhere**_.
+In a world of shortening attention spans and exploding password use,
+most people use one password across several accounts,
+making common attacks like the [LinkedIn hack](FIXME) and the [PS3 break-in](FOXYOU) vicious.
+The savvy obsessively use distinct passwords everywhere,
+which requires keeping an insecure copy on paper, 
+in an online password manager from a company you can't necessarily trust,
+or in an offline password wallet (e.g. the [Firefox password manager](https://support.mozilla.org/en-US/kb/password-manager-remember-delete-change-passwords?redirectlocale=en-US&redirectslug=Remembering+passwords), [gnome-keyring](https://wiki.gnome.org/Projects/GnomeKeyring), [Keychain](https://en.wikipedia.org/wiki/Apple_Keychain), [keepass](http://keepass.info/)) which could be attacked when and if someone gets physical access to your device--and has all the sync problems that rolling your own comes with.
+**Hashapass** is the best of both worlds, creating distinct passwords with more creativity (that is, entropy) than you have in your head from one single master password, all while  _**making no records anywhere**_.
 
 [Hashapass](http://hashapass.com/en/index.html) was originally written by [?????????????????](FIXME).
 
@@ -32,6 +34,8 @@ punctuation character and at least one number.
 My workaround for them is to keep a `passwords.txt` which **only** lists those sites and for each 
 **only** records `hashapass(assholesite.com)+"2#"` where "2#" is whatever addition assuaged their rules.
 
+The more people are disciplined enough to use hashapass everywhere, the safer the web is for all of us.
+
 Pull requests welcome!
 
 ## Paranoia
@@ -40,7 +44,7 @@ But after you have done this for a while, you might start to wonder if you can t
 
 ["God I hope this isn't backdoored"](https://play.google.com/store/apps/details?id=com.hashapass.androidapp&reviewId=Z3A6QU9xcFRPRkRfbkk3aE1nWnZyN2ZmQU1hcFBDdlRNSm9xVnFfQnBscG9YdWxNeHQ3TXBFRUkzcUI3b0ZITjctN0Z5VnYtcnZSRktiR1dLaXRTMS1DcUNR)
 
-Sure, you can [view the source](http://hashapass.com/en/index.js), but it has been minified since it was first written.
+Sure, you can [audit the source](http://hashapass.com/en/index.js), but it has been minified since it was first written.
 The web interface is convenient but the site doesn't use SSL so you as a user of it are very vulnerable to a MITM'd inserting code that records passwords as they are constructed,
 and anyway might crash, run out of funding, electricity or chutzpah any day.
 
@@ -51,7 +55,7 @@ and it is impossible to use the bookmarklet to e.g. sign in to an ssh account.
 You can save the [mobile edition](http://hashapass.com/en/phone.html) to your desktop, but that requires spawning
 a browser with a javascript engine to use--no good if X has crashed on you and you need to login to your remote site to recover a backup.
 
-**This implementation is my safety net against all of these worries**: it runs locally and the core* uses only basic, open-source, cryptography tools:
+**This implementation is my safety net**: by running the code locally, you can operate offline, stay in control, and are future-proofed. The core* is clear and auditable, and uses only basic, open-source, cryptography tools:
 ```
   hashed_pass=$(echo -n $parameter \
         | openssl dgst -sha1 -binary -hmac $password \
@@ -59,9 +63,11 @@ a browser with a javascript engine to use--no good if X has crashed on you and y
 ```
 [* from the original author](http://hashapass.com/en/cmd.html)
 
+If you appreciate this, toss the original author a few dollars on [the android marketplace](https://play.google.com/store/apps/details?id=com.hashapass.androidapp) (or email [him](mailto:info@hashapass.com) and ask if he has a paypal or flattr).
 
 
-## Usage
+Usage
+------
 
 ```
 usage: hashapass [-l] [-s] [parameter]
@@ -97,7 +103,8 @@ if hmac is some day compromised, could reverse engineer your passwords.
 You must have [openssl](https://www.openssl.org/)'s command line interface installed, but if you don't have that your linux is crippled and you should reinstall.
 You must have [zenity](https://help.gnome.org/users/zenity/) and [xclip](http://sourceforge.net/projects/xclip/) installed to use the GUI implementation.
 
-## Mathematical Details
+Mathematical Details
+--------------------
 
 The password is protected by [HMAC](https://en.wikipedia.org/wiki/HMAC)ing the parameter with your master password as the key. HMAC is a way of constructing verifiable hashes out of basic hash functions, and has so far even resisted attacks that have broken the hashes inside it, like MD5. The hash function used is hashapass is [SHA-1](https://en.wikipedia.org/wiki/SHA-1).
 
