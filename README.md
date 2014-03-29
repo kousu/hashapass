@@ -1,4 +1,4 @@
-hashapass
+    hashapass
 =========
 
 Linux implementation of http://hashapass.com (zenity and shell-based).
@@ -7,8 +7,8 @@ In a world of shortening attention spans and exploding password use, most people
 making common attacks like the [LinkedIn hack](FIXME) and the [PS3 break-in](FOXYOU) vicious,
 or obsessively use distinct passwords everywhere,
 requiring them to keep an insecure copy on paper or in an online password manager.
-**Hashapass** is the best of both worlds, mathematically protecting your many distinct passwords with a single master password,
-_**and not recording them anywhere**_.
+**Hashapass** is the best of both worlds, creating distinct passwords with more creativity than you have,
+out of a single master password, while _**making no records anywhere**_.
 
 [Hashapass](http://hashapass.com/en/index.html) was originally written by [?????????????????](FIXME).
 
