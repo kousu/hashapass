@@ -118,6 +118,7 @@ For security, your _master password_ should not be used anywhere except for hash
 
 ## The Competition
 
+* [MasterPassword](http://masterpasswordapp.com/) - _for iOS_
 * [pwdhash](http://pwdhash.com) - _js_ - incompatible (par Stanford University Cryptographer [Dan Boneh](https://crypto.stanford.edu/~dabo/)
 who was one of the founding instructors of Coursera)
 * [hap](https://github.com/sitaramc/hap) - _perl + bash_
