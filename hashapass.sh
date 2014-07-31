@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #hashapass: implement the algorithm from hashapass.com as a shell script
 #nick@kousu.ca, Sep 8, 2013
 #public domain <http://creativecommons.org/publicdomain/zero/1.0/>
