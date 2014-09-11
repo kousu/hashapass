@@ -127,6 +127,11 @@ who was one of the founding instructors of Coursera)
 * [emacs-hashapass](https://github.com/ekpneo/emacs-hashapass) - _elisp_ - for emacs
 * [pdf rainbow encryptor](https://github.com/ant4g0nist/rainbow.py) - _python + pdftk_ - custom purpose
 
+* "Password Hasher":
+    * [Firefox](https://addons.mozilla.org/en-US/firefox/addon/password-hasher/)
+    * [Chrome](https://chrome.google.com/webstore/detail/password-hasher-plus-pass/glopbmohkffbnplcjbbbfmmimfhfnhgd)
+    * Android version: [Twik](https://github.com/gustavomondron/twik/)
+
 For a different approach, you could use the xkcd password generator
 
 * [Torbjørn Kvåle](http://xkcdpassword.com/)'s ([home site](http://kvaale.no/)) 
