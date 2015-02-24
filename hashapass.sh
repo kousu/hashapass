@@ -34,11 +34,11 @@
 #requirements: bash(?), openssl, xclip, zenity (for GUI interface)
 # 
 # TODO: read master password from a keyring, from a file, from stdin (UNSAFE, depending on how the user does it), or on the command line (UNSAFE). then you could log in, unlocked your password hashes, and not actually have to type your master password anywhere.
-# TODO: implement pwdhash
+# TODO: implement variant algorithms, e.g. hmac-sha256, hmac-sha3, hmac-ripemd160. See: https://github.com/kousu/hashapass/pull/1
 # TODO: clean up the if trees--maybe functional can help? 
 #       maybe have to rewrite in python to get this fully nice..
-# TODO: bulk hashing (tho why you would want this
-
+# TODO: bulk hashing (tho why you would want this I don't know)
+# TODO: clear the clipboard automatically, suggestion from @matlink: https://github.com/matlink/hashapass/commit/c6950c032d440c2ba04a3f19545b4707c6ce50c6
 
 usage() {
   echo "Usage:" "hashapass [-l] [-s] [parameter]"
@@ -121,6 +121,7 @@ result=$(hashapass $parameter $password)
 if [ $DISPLAY ] && (which xclip 1>/dev/null); then   #check if we can use the clipboard
   echo -n $result | xclip -selection clipboard;
 else
+  echo "Warning: xclip not found in \$PATH. You should install xclip so that we do not need to display your password openly."
   SHOW=true;
 fi;
 
