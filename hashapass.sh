@@ -106,7 +106,7 @@ hashapass() {
   parameter=$1
   password=$2
   hashed_pass=$(echo -n $parameter \
-	| openssl dgst -sha1 -binary -hmac $password \
+	| openssl dgst -sha256 -binary -hmac $password \
 	| openssl enc -base64)
   if [ $LONG ]; then
     echo $hashed_pass
