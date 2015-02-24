@@ -98,9 +98,9 @@ punctuation character and at least one number.
 [These sites are assholes](http://xkcd.com/936/).
 My workaround for them is to keep a `passwords.txt` which records `hashapass(assholesite.com)+"2#"` where "2#" is whatever addition assuaged their rules.
 
-If you do need to update an account password later _for some reason_, you can [salt](https://en.wikipedia.org/wiki/Salt_%28cryptography%29) the parameter. It might be easier to think of this as adding a counter to the output. e.g. instead of "github.com" enter "github.com2". I record these cases in `passwords.txt` but only if I find myself forgetting the salt.
+If you ever need to completely update an account password, you can [salt](https://en.wikipedia.org/wiki/Salt_%28cryptography%29) the parameter. It might be easier to think of this as adding a counter to the output. e.g. instead of "github.com" enter "github.com2". I record these cases in `passwords.txt` as well, but haphazardly.
 
-Because you get to explicitly choose the "parameter", you can use hashapass for anywhere you need a password: your laptop's root account, your ssh account at work, or a throwaway account on a friends' machine. It is not limited to just the web (like [some other](FIXME) password schemes are).
+Because you get to explicitly choose the "parameter", hashapass frees password hashing from the confines of the web. I use it for my laptop's root account, my ssh account at work, and throwaway accounts on friends' machines.
 
 Dependencies
 ------------
