@@ -37,6 +37,7 @@
 #   zenity [OPTIONAL] (for GUI interface)
 #   xclip [OPTIONAL]
 # 
+# [ ] don't use zenity; instead use `gksu -p`; alternately, patch zenity to do screen grabbing during --password dialogs
 # [ ] read master password from
 #   [ ] a keyring
 #   [ ] a file
@@ -97,7 +98,7 @@ fi
 
 if tty -s; then
   # we're on the command line, use `read`
-  if [ ! $parameter ]; then
+  if [ -z "$parameter" ]; then
     read -p "[hashapass] Parameter: " parameter;
   fi
   
@@ -106,8 +107,8 @@ if tty -s; then
 else
   if which zenity >/dev/null && [ $DISPLAY ]; then
     # we're in a GUI (e.g. dmenu, a .desktop button or via Gnome/KDE's Alt-F2): use `zenity`
-    if [ ! $parameter ]; then
-      if ! parameter=$(zenity --entry --title "hashapass" --text "Parameter: ";); then
+    if [ -z "$parameter" ]; then
+      if ! parameter=$(zenity --entry --title "hashapass" --text "Parameter: "); then
         exit 1;
       fi
     fi
