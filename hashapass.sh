@@ -10,10 +10,10 @@
 # down or tell anyone yet any number of *distinct* subsidiary passwords for
 # each website or account you maintain.
 # 
-# Just provide your parameter and master password, and find your hashed pass
+# Provide your parameter and master password, and find your hashed pass
 # in your X CLIPBOARD.
-# If you aren't running X and/or don't have xclip installed, and/or you pass -s,
-# will show the password on the command line to you.
+# If you aren't running X, don't have xclip, or you give -s,
+# this will display the password *instead of* using the clipboard.
 #
 # Being diligent about separating your passwords in this way will leave you safe while everyone else is crying when yet another site gets hacked and acco means that you'll be sitting pretty while everyone else is crying, like these fine specimens
 #  * Sony PS3:
@@ -63,6 +63,14 @@ case "$opt" in
 esac
 done
 shift $((OPTIND-1)) #eat everything
+
+if ! which xclip 1>/dev/null; then  #check if we can use xclip
+  echo "Warning: xclip not found in \$PATH. You should install xclip so that we do not need to display your password openly." >/dev/stderr
+  SHOW=true;
+fi;
+if [ ! $DISPLAY ]; then   #check if we can use the clipboard, which only works if X is running
+  SHOW=true;
+fi
 
 if [ $USAGE ]; then
   usage;
@@ -117,21 +125,13 @@ hashapass() {
 
 result=$(hashapass $parameter $password)
 
-
-if [ $DISPLAY ] && (which xclip 1>/dev/null); then   #check if we can use the clipboard
-  echo -n $result | xclip -selection clipboard;
-else
-  echo "Warning: xclip not found in \$PATH. You should install xclip so that we do not need to display your password openly."
-  SHOW=true;
-fi;
-
 if [ $SHOW ]; then
   if tty -s; then
     echo $result;
   else
     zenity --info --text "$result" --title "Hashed Password"
   fi
+else
+  # precondition: if we get here, we can run xclip (enforced by a tangled logic chain above)
+  echo -n $result | xclip -selection clipboard -i;
 fi
-
-
-#zenity --text $result --info #useful as a debugging tool? or for other uses? hmm

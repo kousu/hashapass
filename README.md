@@ -68,7 +68,7 @@ Writes the resulting, constructed, password to the system clipboard via `xclip` 
 -l           output "long" passwords: 28 characters (216 bits of entropy).
              By default, outputs 8 chars (64 bits), which is hashapass.com-compatible.
 -s           "show" the password: display it to the user when it has been computed.
-             Always on if xclip is not installed.
+             Automatically enabled if xclip is not installed or not running under X.
 parameter    can be given on the command line to speed up usage or be used in aliases and scripts.
 
 All the arguments are optional.
