@@ -16,8 +16,8 @@
 # this will display the password *instead of* using the clipboard.
 #
 # Being diligent about separating your passwords in this way will leave you safe while everyone else is crying when yet another site gets hacked and acco means that you'll be sitting pretty while everyone else is crying, like these fine specimens
-#  * Sony PS3:
-#  * LinkedIn: 
+#  * Sony PS3: TODO
+#  * LinkedIn: TODO
 #
 # This program implements the particular algorithm from hashapass.com, but
 # pwdhash.com is the same idea with different--tho incompatble--details. Both
@@ -31,14 +31,25 @@
 # If you provide the parameter on the command line, this program will forego -- use this to make favourite buttons or just be able to rattle off hashapasses slightly faster
 # -s		show generated password
 #
-#requirements: bash(?), openssl, xclip, zenity (for GUI interface)
+# requirements:
+#   bash(?)
+#   openssl
+#   zenity [OPTIONAL] (for GUI interface)
+#   xclip [OPTIONAL]
 # 
-# TODO: read master password from a keyring, from a file, from stdin (UNSAFE, depending on how the user does it), or on the command line (UNSAFE). then you could log in, unlocked your password hashes, and not actually have to type your master password anywhere.
-# TODO: implement variant algorithms, e.g. hmac-sha256, hmac-sha3, hmac-ripemd160. See: https://github.com/kousu/hashapass/pull/1
-# TODO: clean up the if trees--maybe functional can help? 
-#       maybe have to rewrite in python to get this fully nice..
-# TODO: bulk hashing (tho why you would want this I don't know)
-# TODO: clear the clipboard automatically, suggestion from @matlink: https://github.com/matlink/hashapass/commit/c6950c032d440c2ba04a3f19545b4707c6ce50c6
+# [ ] read master password from
+#   [ ] a keyring
+#   [ ] a file
+#   [x] stdin (UNSAFE, depending on how the user does it)
+#   [ ] on the command line (UNSAFE).
+#  then you could log in, unlocked your password hashes, and not actually have to type your master password anywhere.
+# [-] implement variant algorithms, e.g. hmac-sha256, hmac-sha3, hmac-ripemd160. See: https://github.com/kousu/hashapass/pull/1
+# [-] bulk hashing (tho why you would want this I don't know)
+# [ ] clear the clipboard automatically, suggestion from @matlink: https://github.com/matlink/hashapass/commit/c6950c032d440c2ba04a3f19545b4707c6ce50c6
+# [ ] Normalize on spaces (not tabs)
+# [ ] i18n
+# [ ] make a GUI mode flag instead of just `tty -s`.
+#     Then zenity is only a soft dependency.
 
 usage() {
   echo "Usage:" "hashapass [-l] [-s] [parameter]"
