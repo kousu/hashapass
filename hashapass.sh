@@ -144,9 +144,8 @@ hashapass() {
 result=$(hashapass $parameter $password)
 
 if [ $SHOW ]; then
-  if tty -s; then
-    echo $result;
-  else
+  echo $result;
+  if ! tty -s; then
     zenity --info --text "$result" --title "hashapass: Hashed Password"
   fi
 else
