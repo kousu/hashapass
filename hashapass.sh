@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #hashapass: implement the algorithm from hashapass.com as a shell script
-#nick@kousu.ca, Sep 8, 2013
+#nick@kousu.ca, Sep 8, 2013 -- 2015
 #public domain <http://creativecommons.org/publicdomain/zero/1.0/>
 
 #usage: hashapass [-l] [-s] [parameter]
