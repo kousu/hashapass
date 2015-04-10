@@ -98,21 +98,21 @@ fi
 if tty -s; then
   # we're on the command line, use `read`
   if [ ! $parameter ]; then
-    read -p "Parameter: " parameter;
+    read -p "[hashapass] Parameter: " parameter;
   fi
   
-  read -s -p "Master Password: " password
+  read -s -p "[hashapass] Master Password: " password
   echo   #add a newline after the nonechoing password input above
 else
   if which zenity >/dev/null && [ $DISPLAY ]; then
     # we're in a GUI (e.g. dmenu, a .desktop button or via Gnome/KDE's Alt-F2): use `zenity`
     if [ ! $parameter ]; then
-      if ! parameter=$(zenity --entry --text "Parameter: ";); then
+      if ! parameter=$(zenity --entry --title "hashapass" --text "Parameter: ";); then
         exit 1;
       fi
     fi
 	
-    if ! password=$(zenity --password --text "Master Password: "); then
+    if ! password=$(zenity --password --title "hashapass" --text "Master Password: "); then
       exit 1;
     fi;
   else
@@ -146,7 +146,7 @@ if [ $SHOW ]; then
   if tty -s; then
     echo $result;
   else
-    zenity --info --text "$result" --title "Hashed Password"
+    zenity --info --text "$result" --title "hashapass: Hashed Password"
   fi
 else
   # precondition: if we get here, we can run xclip (enforced by a tangled logic chain above)
