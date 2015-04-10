@@ -48,8 +48,8 @@
 # [ ] clear the clipboard automatically, suggestion from @matlink: https://github.com/matlink/hashapass/commit/c6950c032d440c2ba04a3f19545b4707c6ce50c6
 # [ ] Normalize on spaces (not tabs)
 # [ ] i18n
-# [ ] make a GUI mode flag instead of just `tty -s`.
-#     Then zenity is only a soft dependency.
+# [ ] Figure out how to distinguish between being run from the GUI (e.g. dmenu, Alt-F2 in Gnome, or a .desktop file) and having stdin piped to us
+#     In the stdin case, give an error, since by design we refuse to read passwords non-interactively
 
 usage() {
   echo "Usage:" "hashapass [-l] [-s] [parameter]"
@@ -104,18 +104,27 @@ if tty -s; then
   read -s -p "Master Password: " password
   echo   #add a newline after the nonechoing password input above
 else
-  # we're in a GUI (e.g. a .desktop button or via Gnome/KDE's Alt-F2): use `zenity`
-  if [ ! $parameter ]; then
-    if ! parameter=$(zenity --entry --text "Parameter: ";); then
-      exit 1;
+  if which zenity >/dev/null && [ $DISPLAY ]; then
+    # we're in a GUI (e.g. dmenu, a .desktop button or via Gnome/KDE's Alt-F2): use `zenity`
+    if [ ! $parameter ]; then
+      if ! parameter=$(zenity --entry --text "Parameter: ";); then
+        exit 1;
+      fi
     fi
-  fi
 	
-  if ! password=$(zenity --password --text "Master Password: "); then
+    if ! password=$(zenity --password --text "Master Password: "); then
+      exit 1;
+    fi;
+  else
+    # see TODO above about this section
+    # (in short: this *should* trigger when the user tries to pipe in to us;
+    #  instead it triggers only when they pipe into us when not running X or if missing zenity)
+    echo "hashapass will not read passwords non-interactively."
+    # (that would defeat the purpose of hashapass, afterall; if the user
+    # is that insistent, they can explicitly save to a plain text file)
     exit 1;
-  fi;
+  fi
 fi
-
 
 hashapass() {
   #from http://hashapass.com/en/cmd.html
