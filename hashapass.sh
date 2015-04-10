@@ -102,7 +102,7 @@ if tty -s; then
   fi
   
   read -s -p "[hashapass] Master Password: " password
-  echo   #add a newline after the nonechoing password input above
+  echo >/dev/stderr   #add a newline after the nonechoing password input above
 else
   if which zenity >/dev/null && [ $DISPLAY ]; then
     # we're in a GUI (e.g. dmenu, a .desktop button or via Gnome/KDE's Alt-F2): use `zenity`
