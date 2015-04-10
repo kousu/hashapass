@@ -81,33 +81,30 @@ elif [ $# -gt 1 ]; then
   exit -1;
 elif [ $# -eq 1 ]; then
   parameter=$1
-  #echo "PARAM:" $1 #DEBUG
-# if this isn't set, ask for the parameter
- #echo "uhh, we'll ask for the param I guess"
 fi
 
 
 if tty -s; then
-	if [ ! $parameter ]; then read -p "Parameter: " parameter; fi
-	read -s -p "Master Password: " password
-	echo   #add a newline after the nonechoing password input above
-
-else #we're being called by a button or something--: use zenity
-	if [ $parameter ]; then
-		if password=$(zenity --password --text "Master Password: "); then
-			echo happy > /dev/null
-		else
-			exit 1;
-	 	fi;
-	else
-		if parameter=$(zenity --entry --text "Parameter: ";) &&
-		   password=$(zenity --password --text "Master Password: "); then
-			echo happy > /dev/null
-		else
-			exit 1;
-	 	fi;
-	fi
+  # we're on the command line, use `read`
+  if [ ! $parameter ]; then
+    read -p "Parameter: " parameter;
+  fi
+  
+  read -s -p "Master Password: " password
+  echo   #add a newline after the nonechoing password input above
+else
+  # we're in a GUI (e.g. a .desktop button or via Gnome/KDE's Alt-F2): use `zenity`
+  if [ ! $parameter ]; then
+    if ! parameter=$(zenity --entry --text "Parameter: ";); then
+      exit 1;
+    fi
+  fi
+	
+  if ! password=$(zenity --password --text "Master Password: "); then
+    exit 1;
+  fi;
 fi
+
 
 hashapass() {
   #from http://hashapass.com/en/cmd.html
