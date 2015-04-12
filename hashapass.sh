@@ -54,17 +54,22 @@
 # [ ] clear the clipboard automatically, suggestion from @matlink: https://github.com/matlink/hashapass/commit/c6950c032d440c2ba04a3f19545b4707c6ce50c6
 # [ ] Normalize on spaces (not tabs)
 # [ ] i18n
+# [x] initialize all my variables so that the environment can't confuse me
 # [ ] Figure out how to distinguish between being run from the GUI (e.g. dmenu, Alt-F2 in Gnome, or a .desktop file) and having stdin piped to us
 #     In the stdin case, give an error, since by design we refuse to read passwords non-interactively
+# [ ] *don't* write the result to stdout when directly called from the GUI
 
 usage() {
   echo "Usage:" "hashapass [-l] [-s] [parameter]"
 }
 
+unset USAGE #initialize... because we don't start clean
+unset SHOW
+unset SSHOW
+unset LONG
 #there is getopt and there is getopts. fml.
 while getopts "hsl" opt; do
 #echo "currently parsing argument '$opt'"
-
 case "$opt" in
   h)
   USAGE=true;;
@@ -101,7 +106,20 @@ elif [ $# -eq 1 ]; then
 fi
 
 
-if tty -s; then
+# figure out if we are at an interative GUI
+# (if not, we're either at an interactive CLI or inside a script)
+unset GUI
+if ! tty -s && [ $DISPLAY ]; then #XXX this is *wrong*. It cannot distinguish between running inside of a script that was run from the GUI and running from the GUI directly.
+  GUI=true  # it can tell apart "are we at a terminal" vs "were we from Alt-F2", though.
+            # I can't think of what to check. there's a bunch of environment vars but they don't change (except for SHLVL, but that's bash-specific and also there's no guarantee the level of the baseline)
+            # the only obvious change is the file descriptors: if we're being used inside a script then they are necessarily wired to a pipe
+            #  but i also maybe *want* 
+            # argh, why does gnome have to wire shit to sockets for no reason? fuck
+fi
+
+#if [ $GUI ]; then    zenity --info --text "Interactive GUI Mode" fi #DEBUG
+
+if [ -z $GUI ]; then
   # we're on the command line, use `read`
   if [ -z "$parameter" ]; then
     read -p "[hashapass] Parameter: " parameter;
@@ -152,32 +170,28 @@ hashapass() {
   fi
 }
 
+
 result=$(hashapass $parameter $password)
 
 
-P=true #whether to print or not.
-       #to support scripting, *always* print when not on a tty
-       # and when on a tty, *only* hide when user has not specified show
-       #XXX does this leak password results into loggers unintentionally?? what is that socket
-if [ -t 1 ]; then
-  if [ -z $SHOW ]; then
-    unset P
-  fi
-fi
-
-if [ $P ]; then
-  echo $result
-fi
-
-
-if [ ! -t 0 ]; then
-  if [ $SHOW ]; then
-     zenity --info --text "$result" --title "hashapass: Hashed Password"
-  fi
-fi
-
-# okay, how about: *always* print to stdout except for if stdout is a tty 
-
+#TODO: check what this does if xclip is missing
 echo -n $result | xclip -selection clipboard -i >/dev/null # dumping xclip's stdout to the bitbucket works around xclip's failure to properly daemonize  
                                                            # *when run in a $() subshell*, xclip inherits the pipe the parent is reading values off and thus hangs the process.  
-                                                           # proper patch in review at https://sourceforge.net/p/xclip/patches/9/  
+                                                           # proper patch in review at https://sourceforge.net/p/xclip/patches/9/
+
+#  if we were told to -s(how):
+#    if stdout is interactive: print, for sure, since yes
+#    else:
+#        if GUI is interactive: zenity
+#        else    : print to stdout (assume we're in a pipe)
+# note that this tree *only outputs once*, so information doesn't leak (well, except for xclip, of course)
+if [ $SHOW ]; then
+  if [ -z $GUI ]; then
+    # neither the GUI nor stdout is interactive, but we were told to -s(how):
+    # so trust the user, and print to stdout
+    echo $result
+  else
+    echo $result #XXX dirty patch: since I don't know how to define "GUI" properly, *leak information* for the sake of making scripting work
+    zenity --info --text "$result" --title "hashapass: Hashed Password"
+  fi
+fi
