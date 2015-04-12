@@ -9,6 +9,11 @@
 # you can have one hard master password that you memorize and never ever write 
 # down or tell anyone yet any number of *distinct* subsidiary passwords for
 # each website or account you maintain.
+#
+# Like sudo, the master password is always read interactively. If you insist on
+# weakening your security by writing down passwords in scripts, write down the
+# generated password, not the master password.
+# (if you have another use case that needs reading from stdin, submit an issue)
 # 
 # Provide your parameter and master password, and find your hashed pass
 # in your X CLIPBOARD.
@@ -143,13 +148,29 @@ hashapass() {
 
 result=$(hashapass $parameter $password)
 
-if [ $SHOW ]; then
-  if tty -s; then
-    echo $result;
-  else
-    zenity --info --text "$result" --title "hashapass: Hashed Password"
+
+P=true #whether to print or not.
+       #to support scripting, *always* print when not on a tty
+       # and when on a tty, *only* hide when user has not specified show
+       #XXX does this leak password results into loggers unintentionally?? what is that socket
+if [ -t 1 ]; then
+  if [ -z $SHOW ]; then
+    unset P
   fi
 fi
+
+if [ $P ]; then
+  echo $result
+fi
+
+
+if [ ! -t 0 ]; then
+  if [ $SHOW ]; then
+     zenity --info --text "$result" --title "hashapass: Hashed Password"
+  fi
+fi
+
+# okay, how about: *always* print to stdout except for if stdout is a tty 
 
 echo -n $result | xclip -selection clipboard -i >/dev/null # dumping xclip's stdout to the bitbucket works around xclip's failure to properly daemonize  
                                                            # *when run in a $() subshell*, xclip inherits the pipe the parent is reading values off and thus hangs the process.  
