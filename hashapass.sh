@@ -144,11 +144,13 @@ hashapass() {
 result=$(hashapass $parameter $password)
 
 if [ $SHOW ]; then
-  echo $result;
-  if ! tty -s; then
+  if tty -s; then
+    echo $result;
+  else
     zenity --info --text "$result" --title "hashapass: Hashed Password"
   fi
-else
-  # precondition: if we get here, we can run xclip (enforced by a tangled logic chain above)
-  echo -n $result | xclip -selection clipboard -i;
 fi
+
+echo -n $result | xclip -selection clipboard -i >/dev/null # dumping xclip's stdout to the bitbucket works around xclip's failure to properly daemonize  
+                                                           # *when run in a $() subshell*, xclip inherits the pipe the parent is reading values off and thus hangs the process.  
+                                                           # proper patch in review at https://sourceforge.net/p/xclip/patches/9/  
