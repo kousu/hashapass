@@ -132,6 +132,12 @@ else
   fi
 fi
 
+# refuse to use the empty password, which would be a giant security risk
+# conveniently, this makes "no input" in GUI mode the same as "cancel"
+if [ -z $password ]; then
+  exit 1
+fi
+
 hashapass() {
   #from http://hashapass.com/en/cmd.html
   parameter=$1
