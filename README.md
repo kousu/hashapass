@@ -1,3 +1,5 @@
+(I haven't been maintaining this. I've been convinced by [The Case Againt Password Hashers](https://lwn.net/Articles/715090/), especially the point that with a hasher you still *need a database* to remember what you named each site and what username you used, especially where you have multiple accounts on a site, that I've switched to [pass](https://www.passwordstore.org/))
+
 hashapass.sh
 ============
 
